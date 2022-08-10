@@ -1,0 +1,15 @@
+{
+    "name": "carsonoffill.com",
+    "version": "1.0.0",
+    "description": "Photography Website",
+    "main": "script.js",
+    "scripts": {
+      "start": "lite-server"
+    },
+    "author": "Carson O'Ffill",
+    "license": "ISC",
+    "devDependencies": {
+      "lite-server": "^2.5.4"
+    }
+  }
+  
