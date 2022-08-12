@@ -46,6 +46,7 @@
 							<a href="images/Earth/GreenMeadow.jpg" class="image"><img src="images/Earth/thumbnail/GreenMeadow.jpg" alt="" /></a>
 							<h2>Zumwalt Meadow, CA</h2>
 							<p></p>
+							<div class="AddToCart" onclick="addToCart(e)">Purchase</div>
 						</article>
 						<article class="thumb">
 							<a href="images/Earth/_MG_3293.jpg" class="image"><img src="images/Earth/thumbnail/_MG_3293.jpg" alt="" /></a>
@@ -168,6 +169,11 @@
 		{x.style.visibility = 'visible';}
 		else
 		{x.style.visibility = 'hidden';}
+	}
+
+	function addToCart(e)
+	{
+		console.log(e)
 	}
 
 </script>
