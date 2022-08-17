@@ -1,22 +1,16 @@
 <script>
-  import { onMount } from "svelte";
-  //this comes from svelte-spa-router
-  //gives the current id of the article
-  //"id" is also what we named the variable path in routes.js
+  import articles from "../items";
   export let params = {};
-
-  let loaded = false;
-  let article = [];
-  onMount(async () => {
-    const res = await fetch(
-      `https://hgv1budnn8.execute-api.us-east-1.amazonaws.com/category/article/${params.id}`
-    );
-    article = await res.json();
-    loaded = true;
-  });
+  let article = articles.filter(d=>d.id == params.id)[0]
+  if (!article)
+  {
+    window.history.go(-1);
+    window.location.reload();
+  }
+  window.scrollTo(0,0); 
 </script>
 
-<div class="sm:mx-16 sm:py-16" style="display: {loaded ? "block" : "none"}">
+<div class="sm:mx-16 sm:py-16">
   <div class=" flex justify-center ">
     <img
       class="object-cover w-full h-48 sm:w-11/12 lg:h-96 lg:w-4/5"

@@ -7,7 +7,7 @@
         </div>
         <br>
         <button style="width: 10em;" onclick="location.href='/Earth.html'" type="button" id="Gallery">GALLERY</button>
-        <button style="width: 10em;" onclick="location.href='/#/store'" type="button" id="Store">STORE</button>
+        <button style="width: 10em;" onclick="location.href='/#/items'" type="button" id="Store">STORE</button>
         <button style="width: 10em;" onclick="location.href='/About.html'" id="About">ABOUT</button>
       </div>
   </body>

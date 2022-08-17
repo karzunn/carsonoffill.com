@@ -1,7 +1,6 @@
 <script>
   import Router from "svelte-spa-router";
   import routes from "./routes";
-  import { location } from "svelte-spa-router";
 </script>
 
 <head>
