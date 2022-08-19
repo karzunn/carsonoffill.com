@@ -6,11 +6,20 @@ export default [
     thumb:"images/Earth/thumbnail/GreenMeadow.jpg",
     image:"images/Earth/GreenMeadow.jpg",
     category:"earth",
-    options:{
-      "canvas":["8x8","20x16"],
-      "foam board":["8x8","20x16"],
-      "paper":["8x8","20x16"],
-    }
+    options:[
+      {
+        "type":"canvas",
+        "sizes":[{"size":"8x8","price":14.99},{"size":"20x16","price":34.99}]
+      },
+      {
+        "type":"foam board",
+        "sizes":[{"size":"8x8","price":11.99},{"size":"20x16","price":24.99}]
+      },
+      {
+        "type":"paper",
+        "sizes":[{"size":"8x8","price":9.99},{"size":"20x16","price":19.99}]
+      }
+    ]
   },
   {
     id:"1",
@@ -19,10 +28,85 @@ export default [
     thumb:"images/Earth/thumbnail/_MG_3293.jpg",
     image:"images/Earth/_MG_3293.jpg",
     category:"earth",
-    options:{
-      "canvas":["8x8","20x16"],
-      "foam board":["8x8","20x16"],
-      "paper":["8x8","20x16"],
-    }
+    options:[
+      {
+        "type":"canvas",
+        "sizes":[{"size":"8x8","price":14.99},{"size":"20x16","price":34.99}]
+      },
+      {
+        "type":"foam board",
+        "sizes":[{"size":"8x8","price":11.99},{"size":"20x16","price":24.99}]
+      },
+      {
+        "type":"paper",
+        "sizes":[{"size":"8x8","price":9.99},{"size":"20x16","price":19.99}]
+      }
+    ]
+  },
+  {
+    id:"2",
+    type:"print",
+    name:"Bear",
+    thumb:"images/Math/thumbnail/BearandCrown.jpg",
+    image:"images/Math/BearandCrown.jpg",
+    category:"math",
+    options:[
+      {
+        "type":"canvas",
+        "sizes":[{"size":"8x8","price":14.99},{"size":"20x16","price":34.99}]
+      },
+      {
+        "type":"foam board",
+        "sizes":[{"size":"8x8","price":11.99},{"size":"20x16","price":24.99}]
+      },
+      {
+        "type":"paper",
+        "sizes":[{"size":"8x8","price":9.99},{"size":"20x16","price":19.99}]
+      }
+    ]
+  },
+  {
+    id:"3",
+    type:"print",
+    name:"The Pleiades",
+    thumb:"images/Space/thumbnail/M45.jpg",
+    image:"images/Space/M45.jpg",
+    category:"space",
+    options:[
+      {
+        "type":"canvas",
+        "sizes":[{"size":"8x8","price":14.99},{"size":"20x16","price":34.99}]
+      },
+      {
+        "type":"foam board",
+        "sizes":[{"size":"8x8","price":11.99},{"size":"20x16","price":24.99}]
+      },
+      {
+        "type":"paper",
+        "sizes":[{"size":"8x8","price":9.99},{"size":"20x16","price":19.99}]
+      }
+    ]
+  },
+  {
+    id:"4",
+    type:"print",
+    name:"Capitol Reef, UT",
+    thumb:"images/Earth/thumbnail/PanoramaPointMilkyWay3.jpg",
+    image:"images/Earth/PanoramaPointMilkyWay3.jpg",
+    category:"earth",
+    options:[
+      {
+        "type":"canvas",
+        "sizes":[{"size":"8x8","price":14.99},{"size":"20x16","price":34.99}]
+      },
+      {
+        "type":"foam board",
+        "sizes":[{"size":"8x8","price":11.99},{"size":"20x16","price":24.99}]
+      },
+      {
+        "type":"paper",
+        "sizes":[{"size":"8x8","price":9.99},{"size":"20x16","price":19.99}]
+      }
+    ]
   }
 ];

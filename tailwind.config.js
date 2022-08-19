@@ -15,6 +15,9 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': '"Source Sans Pro", Helvetica, sans-serif'
+      },
+      height: {
+        '90vh': '90vh',
       }
     },
   },
