@@ -16,8 +16,11 @@ module.exports = {
       fontFamily: {
         'sans': '"Source Sans Pro", Helvetica, sans-serif'
       },
-      height: {
-        '90vh': '90vh',
+      colors: {
+        'black': 'rgb(0 0 0)',
+        'gray': 'rgb(50 50 50)',
+        'darkgray': 'rgb(35 35 35)',
+        'grayblue': 'rgb(50 100 150)'
       }
     },
   },
