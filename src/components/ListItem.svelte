@@ -3,7 +3,7 @@
   export let name = "";
 </script>
 
-<div class="group transform transition duration-500 ease-in-out hover:scale-105 w-80 sm:w-72 md:w-80 bg-white shadow-2xl tracking-wide">
+<div class="group transform transition duration-500 ease-in-out hover:scale-105 w-80 sm:w-72 md:w-80 bg-white shadow-2xl tracking-wide mx-auto my-3">
   <img
     src={thumb}
     alt={name}

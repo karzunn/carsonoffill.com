@@ -63,5 +63,57 @@ export default [
       "foam board":["8x8","20x16"],
       "paper":["8x8","16x11"]
     }
+  },
+  {
+    id:"5",
+    type:"photos",
+    name:"Dolly Sods, WV",
+    thumb:"images/Earth/thumbnail/DollySods.jpg",
+    image:"images/Earth/DollySods.jpg",
+    category:"earth",
+    sizes:{
+      "canvas":["8x8","20x16"],
+      "foam board":["8x8","20x16"],
+      "paper":["8x8","16x11"]
+    }
+  },
+  {
+    id:"6",
+    type:"photos",
+    name:"Big Cottonwood Canyon, UT",
+    thumb:"images/Earth/thumbnail/_MG_8482-2.jpg",
+    image:"images/Earth/_MG_8482-2.jpg",
+    category:"earth",
+    sizes:{
+      "canvas":["8x8","20x16"],
+      "foam board":["8x8","20x16"],
+      "paper":["8x8","16x11"]
+    }
+  },
+  {
+    id:"7",
+    type:"photos",
+    name:"Spruce Knob, WV",
+    thumb:"images/Earth/thumbnail/_MG_5573.jpg",
+    image:"images/Earth/_MG_5573.jpg",
+    category:"earth",
+    sizes:{
+      "canvas":["8x8","20x16"],
+      "foam board":["8x8","20x16"],
+      "paper":["8x8","16x11"]
+    }
+  },
+  {
+    id:"8",
+    type:"photos",
+    name:"Badlands, SD",
+    thumb:"images/Earth/thumbnail/BadLandsWideMilkyBrighterFinal.jpg",
+    image:"images/Earth/BadLandsWideMilkyBrighterFinal.jpg",
+    category:"earth",
+    sizes:{
+      "canvas":["8x8","20x16"],
+      "foam board":["8x8","20x16"],
+      "paper":["8x8","16x11"]
+    }
   }
 ];

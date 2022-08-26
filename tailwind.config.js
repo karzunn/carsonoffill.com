@@ -13,8 +13,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        '1screen': '1vh',
+        '10screen': '10vh',
+        '30screen': '30vh',
+      },
       height: {
-        '20screen': '20vh'
+        '1screen': '1vh',
+        '10screen': '10vh',
+        '20screen': '20vh',
+        '80screen': '80vh'
       },
       fontFamily: {
         'sans': '"Source Sans Pro", Helvetica, sans-serif'

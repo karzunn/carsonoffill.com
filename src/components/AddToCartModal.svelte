@@ -11,12 +11,19 @@
   let price = prices[selectedType].sizes[selectedSize];
 
   function addToCart(){
-    let cartItem = {
-      "id":photo.id,
-      "description":description,
-      "price":price
-    }
-    cartItems.update(cartItems => cartItems.concat(cartItem));
+    cartItems.update(cartItems => {
+      if (cartItems[description]){
+        cartItems[description].quantity += 1
+      }
+      else{
+        cartItems[description] = {
+          "id":photo.id,
+          "price":price,
+          "quantity":1
+        }
+      }
+      return cartItems;
+    });
     close();
   }
 

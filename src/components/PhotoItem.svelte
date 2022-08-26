@@ -80,7 +80,8 @@
   let cartItemCount = 0;
 
   cartItems.subscribe(Items => {
-    cartItemCount = Items.length.toString();
+    cartItemCount = 0
+    Object.keys(Items).map(key => cartItemCount += Items[key].quantity)
 	});
 
   onMount(async () => {
