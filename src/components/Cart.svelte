@@ -27,8 +27,8 @@
   </div>
 
   <div class="fixed inset-x-0 top-0 bg-gray w-full h-10screen my-auto inline-flex">
-    <a class="relative text-white bg-darkgray font-bold py-1screen px-2 my-auto ml-1 rounded text-center cursor-pointer" href="#/items">&#129128;</a>
-    <h1 class="relative my-auto mx-auto text-center text-white tracking-widest text-2xl">STORE</h1>
+    <a class="relative text-white bg-darkgray font-bold py-1screen px-2 my-auto ml-1 rounded text-center cursor-pointer" href="#/store/items">&#129128;</a>
+    <h1 class="relative my-auto mx-auto text-center text-white tracking-widest text-2xl">CART</h1>
   </div>
 
   <div class="fixed inset-x-0 bottom-0 bg-gray grid grid-cols-2 gap-5 h-10screen">

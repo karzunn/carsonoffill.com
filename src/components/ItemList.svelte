@@ -23,18 +23,14 @@
 </script>
 
 <div class="fixed inset-x-0 top-0 bg-darkgray w-screen h-10screen my-auto inline-flex">
-  <div class="absolute bg-darkgray grid grid-cols-3 gap-0 h-10screen w-screen left-0">
-    <div class="m-auto h-10screen text-center text-white tracking-widest text-xl w-30screen">PRINTS</div>
-    <div class="m-auto text-center text-white tracking-widest text-xl w-30screen">PHOTO BOOKS</div>
-    <div class="m-auto text-center text-white tracking-widest text-xl w-30screen">CALENDARS</div>
-  </div>
   <a class="relative text-white bg-darkestgray font-bold py-1screen px-2 my-auto ml-1 rounded text-center cursor-pointer" href="/">&#129128;</a>
+  <h1 class="relative my-auto mx-auto text-center text-white tracking-widest text-2xl">EARTH</h1>
 </div>
 
 <div class="fixed inset-x-0 top-10screen bg-darkestgray w-full h-80screen my-15 overflow-auto">
   <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 bg-darkestgray">
     {#each photos as photo}
-      <a href="#/items/{photo.type}/{photo.id}">
+      <a href="#/store/items/{photo.type}/{photo.id}">
         <ListItem
           name={photo.name}
           thumb={photo.thumb}
@@ -48,7 +44,7 @@
 
 </div>
 
-<a class="absolute bottom-0 right-0 text-white bg-darkestgray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/cart">
+<a class="absolute bottom-0 right-0 text-white bg-darkestgray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
   <div>&#128722;</div>
   <div>{cartItemCount}</div>
 </a>

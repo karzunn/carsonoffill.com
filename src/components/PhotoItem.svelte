@@ -92,8 +92,8 @@
 	});
 </script>
 
-<a class="absolute top-0 left-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center cursor-pointer" href="#/items">&#129128;</a>
-<a class="absolute bottom-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/cart">
+<a class="absolute top-0 left-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center cursor-pointer" href="#/store/items">&#129128;</a>
+<a class="absolute bottom-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
   <div>&#128722;</div>
   <div>{cartItemCount}</div>
 </a>
