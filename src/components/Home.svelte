@@ -1,5 +1,5 @@
 <div>
-  <body>
+  <div class="bg-main bg-cover bg-no-repeat bg-center h-screen">
     <div id="titlePage">
         <div id="titleText">
           <h3>ART OF</h3>
@@ -7,26 +7,12 @@
         </div>
         <br>
         <button style="width: 10em;" onclick="location.href='/Earth.html'" type="button" id="Gallery">GALLERY</button>
-        <button style="width: 10em;" onclick="location.href='/#/store/items'" type="button" id="Store">STORE</button>
+        <button style="width: 10em;" onclick="location.href='/#/store/types'" type="button" id="Store">STORE</button>
         <button style="width: 10em;" onclick="location.href='/About.html'" id="About">ABOUT</button>
       </div>
-  </body>
+    </div>
 
   <style>
-
-    body{
-        padding: 0 0 0 0;
-        height: 100%;
-        width: 100%;
-        background-image: linear-gradient( rgba(0, 0, 0, 0.67), rgba(0, 0, 0, 0.67) ), url('/images/ValleyLastLight.jpg');
-        background-repeat: no-repeat; 
-        background-size: auto 100%;
-        background-position: center;
-    }
-    html{
-        height: 100%;
-        width: 100%;
-    }
   
     @media screen and (min-aspect-ratio: 3/2) {
         body{

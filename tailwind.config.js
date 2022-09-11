@@ -22,7 +22,8 @@ module.exports = {
         '1screen': '1vh',
         '10screen': '10vh',
         '20screen': '20vh',
-        '80screen': '80vh'
+        '80screen': '80vh',
+        '90screen': '90vh'
       },
       fontFamily: {
         'sans': '"Source Sans Pro", Helvetica, sans-serif'
@@ -33,6 +34,9 @@ module.exports = {
         'darkgray': 'rgb(35 35 35)',
         'darkestgray': 'rgb(25 25 25)',
         'grayblue': 'rgb(50 100 150)'
+      },
+      backgroundImage: {
+        'main': "linear-gradient( rgba(0, 0, 0, 0.67), rgba(0, 0, 0, 0.67) ), url('/images/ValleyLastLight.jpg')"
       }
     },
   },
