@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "s3": "aws s3 cp public\\build s3://carsonoffill-dev/build --recursive",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --host"

@@ -2,7 +2,8 @@
   import { cartItems } from "../stores";
   export let description = "";
   export let price = "";
-  export let photo = {};
+  export let thumb = "";
+  export let name = "";
   export let quantity = 0;
   import { Modal, bind } from 'svelte-simple-modal';
   import RemoveFromCartModal from './RemoveFromCartModal.svelte';
@@ -36,8 +37,8 @@
 <Modal show={$modal}></Modal>
 <div class="grid grid-cols-4 gap-5 m-3">
   <img
-    src={photo.thumb}
-    alt={photo.name}
+    src={thumb}
+    alt={name}
     class="object-contain h-20screen"
   />
   <h1 class="text-white text-center my-auto mx-auto">

@@ -17,11 +17,15 @@ module.exports = {
         '1screen': '1vh',
         '10screen': '10vh',
         '30screen': '30vh',
+        '40screen': '40vh',
+        '50screen': '50vh',
+        '10px': '10px',
       },
       height: {
         '1screen': '1vh',
         '10screen': '10vh',
         '20screen': '20vh',
+        '70screen': '70vh',
         '80screen': '80vh',
         '90screen': '90vh'
       },

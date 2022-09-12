@@ -1,16 +1,16 @@
 <div>
   <div class="bg-main bg-cover bg-no-repeat bg-center h-screen">
     <div id="titlePage">
-        <div id="titleText">
-          <h3>ART OF</h3>
-          <h2>CARSON O'FFILL</h2>
-        </div>
-        <br>
-        <button style="width: 10em;" onclick="location.href='/Earth.html'" type="button" id="Gallery">GALLERY</button>
-        <button style="width: 10em;" onclick="location.href='/#/store/types'" type="button" id="Store">STORE</button>
-        <button style="width: 10em;" onclick="location.href='/About.html'" id="About">ABOUT</button>
+      <div id="titleText">
+        <h3>ART OF</h3>
+        <h2>CARSON O'FFILL</h2>
       </div>
+      <br>
+      <button style="width: 10em;" class="button" onclick="location.href='/Earth.html'">GALLERY</button>
+      <button style="width: 10em;" class="button" onclick="location.href='/#/store/types'">STORE</button>
+      <button style="width: 10em;" class="button" onclick="location.href='/About.html'">ABOUT</button>
     </div>
+  </div>
 
   <style>
   
@@ -53,6 +53,14 @@
       font-size: 4rem;
       padding: 1.5rem 0 0 0;
       letter-spacing: 0.1em;
+    }
+
+    @media screen and (orientation: portrait) {
+      .button{
+        display: block;
+        width: 100%;
+        margin: 0.5rem auto;
+      }
     }
 
     @media screen and (max-width: 960px) {

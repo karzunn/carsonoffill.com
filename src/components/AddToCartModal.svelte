@@ -3,12 +3,12 @@
   import { getContext } from 'svelte';
   import prices from "../prices";
   const { close } = getContext('simple-modal');
-  export let photo = {};
+  export let item = {};
   let selectedType = document.getElementsByClassName('selected type')[0].id;
   let selectedSize = document.getElementsByClassName('selected size')[0].id;
-  let selectedPhoto = photo.name;
+  let selectedPhoto = item.name;
   let description = `${selectedPhoto} - ${selectedType} - ${selectedSize}`;
-  let price = prices[selectedType].sizes[selectedSize];
+  let price = prices[item.type][selectedType].sizes[selectedSize];
 
   function addToCart(){
     cartItems.update(cartItems => {
@@ -17,7 +17,7 @@
       }
       else{
         cartItems[description] = {
-          "id":photo.id,
+          "id":item.id,
           "price":price,
           "quantity":1
         }

@@ -1,6 +1,6 @@
 <div class="bg-main bg-cover bg-no-repeat bg-center h-screen flex">
     <div class="text-white m-auto">
-        <div class="w-full block text-center text-4xl">Coming Soon!</div>
+        <div class="w-full block text-center text-4xl">Unavailable</div>
     </div>
 </div>
 

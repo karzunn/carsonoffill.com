@@ -1,20 +1,24 @@
 export default {
-  "canvas":{
-    "sizes":{
-      "8x8":14.99,
-      "20x16":34.99
-    }
-  },
-  "foam board":{
-    "sizes":{
-      "8x8":11.99,
-      "20x16":24.99
-    }
-  },
-  "paper":{
-    "sizes":{
-      "8x8":9.99,
-      "16x11":19.99
+  "print":{
+    "canvas":{
+      "sizes":{
+        "8x8":14.99, //canvasdiscount
+        "12x12":29.99, //easycanvasprints
+        "20x20":69.99, //easycanvasprints
+        "12x18":34.99, //easycanvasprints
+        "16x24":54.99 //canvasdiscount
+      }
+    },
+    "foam board":{
+      "sizes":{
+        "11x14":19.99 //walmart, ship in envelope
+      }
+    },
+    "paper":{
+      "sizes":{
+        "11x14":14.99, //walmart, ship in envelope
+	      "12x12":14.99 //walmart, ship in envelope
+      }
     }
   }
 }
