@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "s3": "aws s3 cp public\\build s3://carsonoffill-dev/build --recursive",
+    "s3-dev": "aws s3 cp public\\build s3://carsonoffill-dev/build --recursive",
+    "s3-prod": "aws s3 cp public\\build s3://carsonoffill.com/build --recursive",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --host"
@@ -24,6 +25,7 @@
     "tailwindcss": "^2.2.19"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.36.0",
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.4.2",
     "svelte-simple-modal": "^1.4.1",

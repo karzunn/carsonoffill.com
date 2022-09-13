@@ -11,13 +11,13 @@ export default {
     },
     "foam board":{
       "sizes":{
-        "11x14":19.99 //walmart, ship in envelope
+        "11x14":19.99
       }
     },
     "paper":{
       "sizes":{
-        "11x14":14.99, //walmart, ship in envelope
-	      "12x12":14.99 //walmart, ship in envelope
+        "11x14":14.99,
+	      "12x12":14.99
       }
     }
   }

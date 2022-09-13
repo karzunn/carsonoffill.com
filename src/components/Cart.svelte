@@ -1,10 +1,25 @@
 <script>
   
+  import {loadStripe} from '@stripe/stripe-js';
   import CartListItem from "./CartListItem.svelte";
   import { cartItems } from "../stores";
   import prints from "../prints";
 
   let cartTotal = 0;
+  let stripe;
+
+  async function checkout() {
+    stripe = await loadStripe('pk_live_51LVKz5A8Ti7QZNbk5BXTOQWtokfkojk4vLivJgZ9wqFnANeLLkAIWIMcRVKlPwEfL5lu3U8AHg7Dlw4AG0N98Mj6004PICG4g8');
+    await stripe.redirectToCheckout({
+      successUrl: 'https://carsonoffill.com/#/store/cart?empty=true',
+      cancelUrl: 'https://carsonoffill.com/#/store/cart',
+      lineItems: [
+        {price: 'price_1LhNSpA8Ti7QZNbkcSBST6iA', quantity: 2},
+      ],
+      mode: 'payment',
+    })
+
+  }
 
   cartItems.subscribe(Items => {
     cartTotal = 0
@@ -37,7 +52,7 @@
     <h1 class="text-white text-center mr-3 ml-auto my-auto">
       Total: ${cartTotal.toFixed(2)}
     </h1>
-    <div class="bg-green-600 text-white py-2 px-4 rounded my-auto text-center cursor-pointer ml-3 mr-auto">
+    <div on:click={checkout} class="bg-green-600 text-white py-2 px-4 rounded my-auto text-center cursor-pointer ml-3 mr-auto">
       Checkout
     </div>
   </div>
