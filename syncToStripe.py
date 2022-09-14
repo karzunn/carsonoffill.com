@@ -1,27 +1,31 @@
-test = True
+test = False
 
 import stripe
 import json
 
+base = ""
+
 if test:
     stripe.api_key = "sk_test_51LVKz5A8Ti7QZNbk73gaMw7c2RL10pr5AkEC539YRkPOPBTRTDdTfgXebU41reiSU0DLKrzOhvQdWFOSLcKCmV2e00k40KMQsH"
+    base = "http://carsonoffill-dev.s3-website-us-east-1.amazonaws.com"
 else:
     stripe.api_key = "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"
+    base = "http://carsonoffill.com"
 
 import json
 
-prints = open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\prints.js", "r").read()
+prints = open("src\\prints.js", "r").read()
 prints = json.loads(prints.replace("export default ","").replace(";",""))
 
-prices = open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\prices.js", "r").read()
+prices = open("src\\prices.js", "r").read()
 prices = json.loads(prices.replace("export default ","").replace(";","").replace("//easycanvasprints","").replace("//canvasdiscount",""))["print"]
 
 if test:
-    stripePrints = open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\test-stripePrints.js", "r").read()
+    stripePrints = open("src\\test-stripePrints.js", "r").read()
     stripePrints = json.loads(stripePrints.replace("export default ","").replace(";",""))
     newStripePrints = []
 else:
-    stripePrints = open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\stripePrints.js", "r").read()
+    stripePrints = open("src\\stripePrints.js", "r").read()
     stripePrints = json.loads(stripePrints.replace("export default ","").replace(";",""))
     newStripePrints = []
 
@@ -40,7 +44,7 @@ for p in prints:
                 else:
                     response = stripe.Product.create(
                         name=newPrint["description"],
-                        images=["http://carsonoffill-dev.s3-website-us-east-1.amazonaws.com/"+p["thumb"]]
+                        images=["{}/{}".format(base,p["thumb"])]
                     )
                     newPrint["product"] = response["id"]
                 response = stripe.Price.search(
@@ -55,22 +59,33 @@ for p in prints:
                         product=newPrint["product"],
                     )
                     newPrint["price"] = response["id"]
-            else: #Code to update existing should go here
+            else:
                 newPrint = existingPrint[0]
                 response = stripe.Product.modify(
                     newPrint["product"],
                     name=newPrint["description"],
-                    images=["http://carsonoffill-dev.s3-website-us-east-1.amazonaws.com/"+p["thumb"]]
+                    images=["{}/{}".format(base,p["thumb"])]
                 )
-                response = stripe.Price.modify(
-                    newPrint["price"],
-                    currency_options={"usd":{"unit_amount":int(prices[cat]["sizes"][size]*100)}},
+                response = stripe.Price.search(
+                    query='product:"{}"'.format(newPrint["product"]),
                 )
+                if response["data"][0]["unit_amount"] != int(prices[cat]["sizes"][size]*100):
+                    response = stripe.Price.modify(
+                        newPrint["price"],
+                        active=False
+                    )
+                    response = stripe.Price.create(
+                        unit_amount=int(prices[cat]["sizes"][size]*100),
+                        currency="usd",
+                        product=newPrint["product"],
+                    )
+                    newPrint["price"] = response["id"]
+                newPrint["price"] = response["data"][0]["id"]
 
 
             newStripePrints.append(newPrint)
 
 if test:
-    open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\test-stripePrints.js", "w").write("export default ["+",\n".join(map(str,newStripePrints)).replace("'",'"')+"];")
+    open("src\\test-stripePrints.js", "w").write("export default ["+",\n".join(map(str,newStripePrints)).replace("'",'"')+"];")
 else:
-    open("C:\\Users\\cgo_1\\Desktop\\Code\\carsonoffill.com\\src\\stripePrints.js", "w").write("export default ["+",\n".join(map(str,newStripePrints)).replace("'",'"')+"];")
+    open("src\\stripePrints.js", "w").write("export default ["+",\n".join(map(str,newStripePrints)).replace("'",'"')+"];")
