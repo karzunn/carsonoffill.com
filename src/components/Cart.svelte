@@ -4,18 +4,34 @@
   import CartListItem from "./CartListItem.svelte";
   import { cartItems } from "../stores";
   import prints from "../prints";
+  import products from "../stripePrints";
+  import { get } from 'svelte/store';
+  import {querystring} from 'svelte-spa-router';
 
   let cartTotal = 0;
   let stripe;
 
+  let queryparams = {};
+  let vars = $querystring.split('&');
+  for (let i = 0; i < vars.length; i++) {
+      let pair = vars[i].split('=');
+      queryparams[pair[0]] = pair[1];
+  }
+
+  if (queryparams.empty == "true") {
+    cartItems.update(cartItems=>{return {}})
+  }
+
   async function checkout() {
+    let items = get(cartItems);
     stripe = await loadStripe('pk_live_51LVKz5A8Ti7QZNbk5BXTOQWtokfkojk4vLivJgZ9wqFnANeLLkAIWIMcRVKlPwEfL5lu3U8AHg7Dlw4AG0N98Mj6004PICG4g8');
     await stripe.redirectToCheckout({
       successUrl: 'https://carsonoffill.com/#/store/cart?empty=true',
       cancelUrl: 'https://carsonoffill.com/#/store/cart',
-      lineItems: [
-        {price: 'price_1LhNSpA8Ti7QZNbkcSBST6iA', quantity: 2},
-      ],
+      lineItems: Object.keys(items).map(key=>{
+        let item = products.filter(product=>product.description == key)[0]
+        return {price:item.price,quantity:items[key].quantity}
+      }),
       mode: 'payment',
     })
 
