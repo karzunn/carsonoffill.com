@@ -37,7 +37,8 @@ module.exports = {
         'gray': 'rgb(50 50 50)',
         'darkgray': 'rgb(35 35 35)',
         'darkestgray': 'rgb(25 25 25)',
-        'grayblue': 'rgb(50 100 150)'
+        'accent': 'rgb(230 115 0)',
+        'brand': 'rgb(60 100 120)'
       },
       backgroundImage: {
         'main': "linear-gradient( rgba(0, 0, 0, 0.67), rgba(0, 0, 0, 0.67) ), url('/images/ValleyLastLight.jpg')"

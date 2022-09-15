@@ -2,11 +2,12 @@
   
   import {loadStripe} from '@stripe/stripe-js';
   import CartListItem from "./CartListItem.svelte";
-  import { cartItems } from "../stores";
+  import { cartItems, history } from "../stores";
   import prints from "../prints";
   import products from "../stripePrints";
   import { get } from 'svelte/store';
   import {querystring} from 'svelte-spa-router';
+  import { goBack } from '../functions';
 
   let cartTotal = 0;
   let stripe;
@@ -22,6 +23,8 @@
     cartItems.update(cartItems=>{return {}})
   }
 
+  history.update(history => history.concat(window.location.hash));
+
   async function checkout() {
     let items = get(cartItems);
     stripe = await loadStripe('pk_live_51LVKz5A8Ti7QZNbk5BXTOQWtokfkojk4vLivJgZ9wqFnANeLLkAIWIMcRVKlPwEfL5lu3U8AHg7Dlw4AG0N98Mj6004PICG4g8');
@@ -33,8 +36,8 @@
         return {price:item.price,quantity:items[key].quantity}
       }),
       mode: 'payment',
+      shippingAddressCollection: { allowedCountries: ["US"] }
     })
-
   }
 
   cartItems.subscribe(Items => {
@@ -59,7 +62,7 @@
   </div>
 
   <div class="fixed inset-x-0 top-0 bg-gray w-full h-10screen my-auto inline-flex">
-    <div class="text-2xl pb-1 px-10px relative text-white bg-darkgray font-bold my-auto ml-1 rounded text-center cursor-pointer" onclick="history.go(-1); event.preventDefault();">&#8249;</div>
+    <div class="text-2xl pb-1 px-10px relative text-white bg-darkgray font-bold my-auto ml-1 rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
     <h1 class="relative my-auto mx-auto text-center text-white tracking-widest text-2xl">CART</h1>
     <div class="text-2xl pb-1 px-10px relative my-auto ml-1 invisible">&#8249;</div>
   </div>
@@ -68,7 +71,7 @@
     <h1 class="text-white text-center mr-3 ml-auto my-auto">
       Total: ${cartTotal.toFixed(2)}
     </h1>
-    <div on:click={checkout} class="bg-green-600 text-white py-2 px-4 rounded my-auto text-center cursor-pointer ml-3 mr-auto">
+    <div on:click={checkout} class="bg-accent text-white font-semibold py-2 px-4 rounded my-auto text-center cursor-pointer ml-3 mr-auto">
       Checkout
     </div>
   </div>

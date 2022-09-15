@@ -1,3 +1,8 @@
+<script>
+  import { history } from "../stores";
+  history.update(history => history.concat(window.location.hash));
+</script>
+
 <div>
   <div class="bg-main bg-cover bg-no-repeat bg-center h-screen">
     <div id="titlePage">

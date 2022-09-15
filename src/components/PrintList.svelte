@@ -4,6 +4,7 @@
   import allPrints from "../prints";
   import {querystring} from 'svelte-spa-router';
   import { cartItems } from "../stores";
+  import { history } from "../stores";
 
   let cartItemCount = 0;
 
@@ -24,6 +25,18 @@
   if (!categories.includes(category)) {
     window.location.href = '/#/unavailable';
   }
+
+  history.update(history => history.concat(window.location.hash));
+  window.onhashchange = function() {
+    history.update(history => {
+      if (window.location.hash != history.slice(-1)[0]) {
+        return history.concat(window.location.hash)
+      }
+      else {
+        return history
+      }
+    });
+  };
 
   let photos = allPrints.filter(photo => photo.category == category);
 
