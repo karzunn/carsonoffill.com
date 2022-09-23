@@ -12,22 +12,18 @@
 
   function updateCrop() {
     let imageContainer = document.getElementById("imageContainer");
+    let body = document.getElementById("body");
     let topCrop = document.getElementById("topCrop");
     let bottomCrop = document.getElementById("bottomCrop");
     let leftCrop = document.getElementById("leftCrop");
     let rightCrop = document.getElementById("rightCrop");
     let imageWidth;
     let imageHeight;
-
-    let imageLandscape = true;Nosrac-321-dis2
-    if (imageContainer.naturalHeight > imageContainer.naturalWidth) {
-      imageLandscape = false;
-    }
-
+    let screenLandscape = imageContainer.offsetHeight == body.offsetHeight;
     let imageAspectRatio = imageContainer.naturalWidth / imageContainer.naturalHeight;
     let containerAspectRatio = imageContainer.offsetWidth / imageContainer.offsetHeight;
-    let goalHeight = imageAspectRatio > 1 ? Number(selectedPrintSize.split("x")[1]) : Number(selectedPrintSize.split("x")[0]);
-    let goalWidth = imageAspectRatio > 1 ? Number(selectedPrintSize.split("x")[0]) : Number(selectedPrintSize.split("x")[1]);
+    let goalHeight = imageAspectRatio < 1 ? Number(selectedPrintSize.split("x")[1]) : Number(selectedPrintSize.split("x")[0]);
+    let goalWidth = imageAspectRatio < 1 ? Number(selectedPrintSize.split("x")[0]) : Number(selectedPrintSize.split("x")[1]);
 
     if (imageAspectRatio > containerAspectRatio) {
       imageHeight = imageContainer.offsetWidth / imageAspectRatio;
@@ -42,15 +38,27 @@
     let horizontalOffset = (imageContainer.offsetWidth - imageWidth) / 2;
 
     let verticalRemove = (imageHeight - (goalHeight*imageWidth) / goalWidth) / 2;
-    verticalRemove = verticalRemove < 0 ? 0 : verticalRemove + verticalOffset;
+    verticalRemove = verticalRemove < 0 ? 0 : (verticalRemove + verticalOffset);
     let horizontalRemove = (imageWidth - (imageHeight*goalWidth) / goalHeight) / 2;
-    horizontalRemove = horizontalRemove < 0 ? 0 : horizontalRemove + horizontalOffset;
+    horizontalRemove = horizontalRemove < 0 ? 0 : (horizontalRemove + horizontalOffset);
 
-
-
-    bottomCrop.style.bottom = `0px`;
-    bottomCrop.style.height = `${imageContainer.offsetHeight/2}px`;
+    bottomCrop.style.bottom = `${screenLandscape ? 0 : (body.offsetHeight - imageContainer.offsetHeight)}px`;
+    bottomCrop.style.height = `${verticalRemove}px`;
     bottomCrop.style.width = `${imageContainer.offsetWidth}px`;
+
+    topCrop.style.top = `0px`;
+    topCrop.style.height = `${verticalRemove}px`;
+    topCrop.style.width = `${imageContainer.offsetWidth}px`;
+
+    leftCrop.style.top = `0px`;
+    leftCrop.style.left = `0px`;
+    leftCrop.style.height = `${imageContainer.offsetHeight}px`;
+    leftCrop.style.width = `${horizontalRemove}px`;
+
+    rightCrop.style.top = `0px`;
+    rightCrop.style.right = `${screenLandscape ? (body.offsetWidth - imageContainer.offsetWidth) : 0}px`;
+    rightCrop.style.height = `${imageContainer.offsetHeight}px`;
+    rightCrop.style.width = `${horizontalRemove}px`;
   }
 
   window.scrollTo(0, 0);
@@ -98,6 +106,7 @@
     selectedPrintSize = selected.id;
     selected.classList.add("selected"); selected.classList.remove("opacity-25");
     calcPrice();
+    updateCrop();
   }
 
   function generateTypes(){
@@ -140,14 +149,12 @@
     selectType();
     generateSizes();
     selectSize();
-    updateCrop();
     window.addEventListener('resize', updateCrop);
 	});
 </script>
 
-<div class="w-screen h-screen bg-darkgray">
+<div id="body" class="w-screen h-screen bg-darkgray">
 
-  <div class="fixed text-2xl pb-1 px-10px m-2 top-0 left-0 text-white bg-gray bg-opacity-75 font-bold rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
   <a class="fixed bottom-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
     <div>&#128722;</div>
     <div>{cartItemCount}</div>
@@ -167,6 +174,8 @@
       <div class="absolute bg-black bg-opacity-75" id="leftCrop"></div>
       <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
+
+    <div class="fixed text-2xl pb-1 px-10px m-2 top-0 left-0 text-white bg-gray bg-opacity-75 font-bold rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
 
     <div class="w-full tracking-widest lg:h-screen">
       <h1 class="lg:text-left lg:mt-8 text-center lg:text-4xl text-xl">{print.name.toUpperCase()}</h1>
