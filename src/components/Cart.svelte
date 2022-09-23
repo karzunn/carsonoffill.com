@@ -1,13 +1,31 @@
 <script>
   
-  import {loadStripe} from '@stripe/stripe-js';
+  import { loadStripe } from '@stripe/stripe-js';
   import CartListItem from "./CartListItem.svelte";
   import { cartItems, history } from "../stores";
   import prints from "../prints";
-  import products from "../stripePrints";
+  import productsProd from "../stripePrints";
+  import productsDev from "../test-stripePrints";
   import { get } from 'svelte/store';
-  import {querystring} from 'svelte-spa-router';
+  import { querystring } from 'svelte-spa-router';
   import { goBack } from '../functions';
+  import { baseUrlDev,baseUrlProd,stripeKeyDev,stripeKeyProd,env } from "../constants";
+  import { addHistory } from "../functions";
+
+  let stripeKey;
+  let baseUrl;
+  let products;
+
+  if (env == "prod") {
+    stripeKey = stripeKeyProd;
+    baseUrl = baseUrlProd;
+    products = productsProd;
+  }
+  if (env == "dev") {
+    stripeKey = stripeKeyDev;
+    baseUrl = baseUrlDev;
+    products = productsDev;
+  }
 
   let cartTotal = 0;
   let stripe;
@@ -23,14 +41,15 @@
     cartItems.update(cartItems=>{return {}})
   }
 
-  history.update(history => history.concat(window.location.hash));
+  addHistory();
+  history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
   async function checkout() {
     let items = get(cartItems);
-    stripe = await loadStripe('pk_live_51LVKz5A8Ti7QZNbk5BXTOQWtokfkojk4vLivJgZ9wqFnANeLLkAIWIMcRVKlPwEfL5lu3U8AHg7Dlw4AG0N98Mj6004PICG4g8');
+    stripe = await loadStripe(stripeKey);
     await stripe.redirectToCheckout({
-      successUrl: 'https://carsonoffill.com/#/store/cart?empty=true',
-      cancelUrl: 'https://carsonoffill.com/#/store/cart',
+      successUrl: `${baseUrl}/#/store/cart?empty=true`,
+      cancelUrl: `${baseUrl}/#/store/cart`,
       lineItems: Object.keys(items).map(key=>{
         let item = products.filter(product=>product.description == key)[0]
         return {price:item.price,quantity:items[key].quantity}

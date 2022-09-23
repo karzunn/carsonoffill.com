@@ -1,6 +1,7 @@
 <script>
   import { history } from "../stores";
-  history.update(history => history.concat(window.location.hash));
+  history.update(history => []);
+  history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 </script>
 
 <div>

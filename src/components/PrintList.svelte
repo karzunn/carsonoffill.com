@@ -5,6 +5,7 @@
   import {querystring} from 'svelte-spa-router';
   import { cartItems } from "../stores";
   import { history } from "../stores";
+  import { addHistory } from "../functions";
 
   let cartItemCount = 0;
 
@@ -26,17 +27,9 @@
     window.location.href = '/#/unavailable';
   }
 
-  history.update(history => history.concat(window.location.hash));
-  window.onhashchange = function() {
-    history.update(history => {
-      if (window.location.hash != history.slice(-1)[0]) {
-        return history.concat(window.location.hash)
-      }
-      else {
-        return history
-      }
-    });
-  };
+  addHistory();
+  window.onhashchange = () => { addHistory() };
+  history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
   let photos = allPrints.filter(photo => photo.category == category);
 

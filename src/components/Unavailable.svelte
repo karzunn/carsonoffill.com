@@ -1,8 +1,9 @@
 <script>
     import { history } from "../stores";
-    import { goBack } from '../functions';
+    import { goBack, addHistory } from '../functions';
 
-    history.update(history => history.concat(window.location.hash));
+    addHistory();
+    history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 </script>
 
 <div class="bg-main bg-cover bg-no-repeat bg-center h-screen flex">

@@ -1,3 +1,10 @@
+<script>
+    import { history } from "../stores";
+
+    history.update(history => []);
+    history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
+</script>
+
 <div class="bg-main bg-cover bg-no-repeat bg-center h-screen flex">
     <div class="text-white m-auto">
         <a class="w-full block text-center border-2 p-4 my-8 text-3xl" href="/#/store/prints?category=earth">PRINTS</a>

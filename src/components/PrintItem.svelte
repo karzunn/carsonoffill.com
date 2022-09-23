@@ -6,9 +6,52 @@
   import prices from "../prices";
   import { cartItems, history } from "../stores";
   import { writable } from 'svelte/store';
-  import { goBack } from '../functions';
+  import { goBack, addHistory } from '../functions';
   export const modal = writable(null);
   export let params = {};
+
+  function updateCrop() {
+    let imageContainer = document.getElementById("imageContainer");
+    let topCrop = document.getElementById("topCrop");
+    let bottomCrop = document.getElementById("bottomCrop");
+    let leftCrop = document.getElementById("leftCrop");
+    let rightCrop = document.getElementById("rightCrop");
+    let imageWidth;
+    let imageHeight;
+
+    let imageLandscape = true;Nosrac-321-dis2
+    if (imageContainer.naturalHeight > imageContainer.naturalWidth) {
+      imageLandscape = false;
+    }
+
+    let imageAspectRatio = imageContainer.naturalWidth / imageContainer.naturalHeight;
+    let containerAspectRatio = imageContainer.offsetWidth / imageContainer.offsetHeight;
+    let goalHeight = imageAspectRatio > 1 ? Number(selectedPrintSize.split("x")[1]) : Number(selectedPrintSize.split("x")[0]);
+    let goalWidth = imageAspectRatio > 1 ? Number(selectedPrintSize.split("x")[0]) : Number(selectedPrintSize.split("x")[1]);
+
+    if (imageAspectRatio > containerAspectRatio) {
+      imageHeight = imageContainer.offsetWidth / imageAspectRatio;
+      imageWidth = imageContainer.offsetWidth;
+    }
+    else {
+      imageHeight = imageContainer.offsetHeight;
+      imageWidth = imageContainer.offsetHeight * imageAspectRatio;
+    }
+
+    let verticalOffset = (imageContainer.offsetHeight - imageHeight) / 2;
+    let horizontalOffset = (imageContainer.offsetWidth - imageWidth) / 2;
+
+    let verticalRemove = (imageHeight - (goalHeight*imageWidth) / goalWidth) / 2;
+    verticalRemove = verticalRemove < 0 ? 0 : verticalRemove + verticalOffset;
+    let horizontalRemove = (imageWidth - (imageHeight*goalWidth) / goalHeight) / 2;
+    horizontalRemove = horizontalRemove < 0 ? 0 : horizontalRemove + horizontalOffset;
+
+
+
+    bottomCrop.style.bottom = `0px`;
+    bottomCrop.style.height = `${imageContainer.offsetHeight/2}px`;
+    bottomCrop.style.width = `${imageContainer.offsetWidth}px`;
+  }
 
   window.scrollTo(0, 0);
 
@@ -17,7 +60,8 @@
     print = prints[0];
     window.location.href = '/#/unavailable';
   }
-  history.update(history => history.concat(window.location.hash));
+  addHistory();
+  history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
   const showModal = () => modal.set(bind(AddToCartModal, { item: print }));
 
@@ -43,12 +87,15 @@
     }
   }
 
+  let selectedPrintSize;
+
   function selectSize(e){
     let types = document.querySelectorAll('.size');
     for (let i=0;i<types.length;i++){
         types[i].classList.remove("selected"); types[i].classList.add("opacity-25");
     };
     let selected = e ? e.target : types[0];
+    selectedPrintSize = selected.id;
     selected.classList.add("selected"); selected.classList.remove("opacity-25");
     calcPrice();
   }
@@ -93,6 +140,8 @@
     selectType();
     generateSizes();
     selectSize();
+    updateCrop();
+    window.addEventListener('resize', updateCrop);
 	});
 </script>
 
@@ -111,7 +160,12 @@
         class="object-contain lg:h-screen h-40screen w-full justify-center bg-black"
         src={print.image}
         alt={print.name}
+        id="imageContainer"
       />
+      <div class="absolute bg-black bg-opacity-75" id="topCrop"></div>
+      <div class="absolute bg-black bg-opacity-75" id="bottomCrop"></div>
+      <div class="absolute bg-black bg-opacity-75" id="leftCrop"></div>
+      <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
 
     <div class="w-full tracking-widest lg:h-screen">
