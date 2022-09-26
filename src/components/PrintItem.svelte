@@ -106,7 +106,7 @@
     selectedPrintSize = selected.id;
     selected.classList.add("selected"); selected.classList.remove("opacity-25");
     calcPrice();
-    updateCrop();
+    setTimeout(updateCrop,50);
   }
 
   function generateTypes(){
@@ -155,11 +155,6 @@
 
 <div id="body" class="w-screen h-screen bg-darkgray">
 
-  <a class="fixed bottom-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
-    <div>&#128722;</div>
-    <div>{cartItemCount}</div>
-  </a>
-
   <div class="grid lg:grid-cols-3 grid-cols-1 gap-4 justify-center bg-darkgray text-white">
 
     <div class="justify-center w-full col-span-1 lg:col-span-2">
@@ -174,6 +169,11 @@
       <div class="absolute bg-black bg-opacity-75" id="leftCrop"></div>
       <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
+
+    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
+      <div>&#128722;</div>
+      <div>{cartItemCount}</div>
+    </a>
 
     <div class="fixed text-2xl pb-1 px-10px m-2 top-0 left-0 text-white bg-gray bg-opacity-75 font-bold rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
 

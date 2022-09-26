@@ -69,6 +69,7 @@ for p in prints:
                 response = stripe.Price.search(
                     query='product:"{}"'.format(newPrint["product"]),
                 )
+                newPrint["price"] = response["data"][0]["id"]
                 if response["data"][0]["unit_amount"] != int(prices[cat]["sizes"][size]*100):
                     response = stripe.Price.modify(
                         newPrint["price"],
@@ -80,8 +81,6 @@ for p in prints:
                         product=newPrint["product"],
                     )
                     newPrint["price"] = response["id"]
-                newPrint["price"] = response["data"][0]["id"]
-
 
             newStripePrints.append(newPrint)
 

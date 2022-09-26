@@ -51,6 +51,10 @@
     <div on:click={selectCategory} id="math" class="relative my-auto mx-auto text-center text-white {category != "math" ? "opacity-25" : ""} tracking-widest text-xl lg:text-2xl cursor-pointer">MATH</div>
     {/key}
     <div class="text-2xl pb-1 px-10px relative my-auto ml-1 invisible">&#8249;</div>
+    <a class="relative right-0 text-white bg-darkestgray bg-opacity-75 font-bold py-1 px-2 my-auto mr-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
+      <div>&#128722;</div>
+      <div>{cartItemCount}</div>
+    </a>
   </div>
 
   <div class="fixed inset-x-0 top-10screen bg-darkestgray w-full lg:h-90screen h-80screen my-15 overflow-auto">
@@ -67,10 +71,5 @@
       {/key}
     </div>
   </div>
-
-  <a class="fixed bottom-0 right-0 text-white bg-darkestgray bg-opacity-75 font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
-    <div>&#128722;</div>
-    <div>{cartItemCount}</div>
-  </a>
 
 </div>
