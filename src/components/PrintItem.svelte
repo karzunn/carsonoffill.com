@@ -11,8 +11,8 @@
   export let params = {};
 
   function updateCrop() {
-    let imageContainer = document.getElementById("imageContainer");
     let body = document.getElementById("body");
+    let imageContainer = document.getElementById("imageContainer");
     let topCrop = document.getElementById("topCrop");
     let bottomCrop = document.getElementById("bottomCrop");
     let leftCrop = document.getElementById("leftCrop");
@@ -37,7 +37,7 @@
     let verticalOffset = (imageContainer.offsetHeight - imageHeight) / 2;
     let horizontalOffset = (imageContainer.offsetWidth - imageWidth) / 2;
 
-    let verticalRemove = (imageHeight - (goalHeight*imageWidth) / goalWidth) / 2;
+    let verticalRemove = (imageHeight - (goalHeight * imageWidth) / goalWidth) / 2;
     verticalRemove = verticalRemove < 0 ? 0 : (verticalRemove + verticalOffset);
     let horizontalRemove = (imageWidth - (imageHeight*goalWidth) / goalHeight) / 2;
     horizontalRemove = horizontalRemove < 0 ? 0 : (horizontalRemove + horizontalOffset);
@@ -79,13 +79,21 @@
   const showModal = () => modal.set(bind(AddToCartModal, { item: print }));
 
   function calcPrice(){
+    let priceDisplay = document.getElementById('price');
     let selectedType = document.getElementsByClassName('selected type')[0].id;
     let selectedSize = document.getElementsByClassName('selected size')[0].id;
     let price = prices[print.type][selectedType].sizes[selectedSize];
-    document.getElementById("price").innerHTML = "$" + price.toString();
+    priceDisplay.innerHTML = "$" + price.toString();
   }
 
   function selectType(e){
+    let addToCartButton = document.getElementById('addToCart');
+    let priceDisplay = document.getElementById('price');
+    let selectSizeMessage = document.getElementById('selectSizeMessage');
+    let topCrop = document.getElementById("topCrop");
+    let bottomCrop = document.getElementById("bottomCrop");
+    let leftCrop = document.getElementById("leftCrop");
+    let rightCrop = document.getElementById("rightCrop");
     let types = document.querySelectorAll('.type');
     for (let i=0;i<types.length;i++){
       types[i].classList.remove("selected"); types[i].classList.add("opacity-25");
@@ -95,14 +103,22 @@
     if (e)
     {
       generateSizes();
-      selectSize();
-      calcPrice();
     }
+    addToCartButton.style.display = "none";
+    priceDisplay.style.display = "none";
+    selectSizeMessage.style.display = "block";
+    topCrop.style.height = "0px";
+    bottomCrop.style.height = "0px";
+    leftCrop.style.height = "0px";
+    rightCrop.style.height = "0px";
   }
 
-  let selectedPrintSize;
+  let selectedPrintSize = false;
 
   function selectSize(e){
+    let addToCartButton = document.getElementById('addToCart');
+    let priceDisplay = document.getElementById('price');
+    let selectSizeMessage = document.getElementById('selectSizeMessage');
     let types = document.querySelectorAll('.size');
     for (let i=0;i<types.length;i++){
         types[i].classList.remove("selected"); types[i].classList.add("opacity-25");
@@ -110,8 +126,11 @@
     let selected = e ? e.target : types[0];
     selectedPrintSize = selected.id;
     selected.classList.add("selected"); selected.classList.remove("opacity-25");
+    addToCartButton.style.display = "block";
+    priceDisplay.style.display = "block";
+    selectSizeMessage.style.display = "none";
     calcPrice();
-    setTimeout(updateCrop,50);
+    updateCrop();
   }
 
   function generateTypes(){
@@ -128,8 +147,8 @@
   }
 
   function generateSizes(){
-    let selectedType = document.getElementsByClassName('selected type')[0].id;
     let sizesContainer = document.getElementById("sizes");
+    let selectedType = document.getElementsByClassName('selected type')[0].id;
     sizesContainer.innerHTML = "";
     let sizes = print.sizes[selectedType];
     for (let size of sizes){
@@ -153,7 +172,6 @@
     generateTypes();
     selectType();
     generateSizes();
-    selectSize();
     window.addEventListener('resize', updateCrop);
 	});
 </script>
@@ -192,9 +210,10 @@
       </div>
       <div class="inline-flex mt-2 mb-4 lg:mt-16 w-full justify-center lg:justify-start">
         <Modal show={$modal}>
-          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 text-center cursor-pointer lg:text-base text-sm" id="addToCart" on:click={showModal}>ADD TO CART</div>
+          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 text-center cursor-pointer lg:text-base text-sm" style="display: none;" id="addToCart" on:click={showModal}>ADD TO CART</div>
         </Modal>
-        <div class="px-4 text-center lg:text-2xl text-base my-auto" id="price"></div>
+        <div class="px-4 text-center lg:text-2xl text-base my-auto" style="display: none;" id="price"></div>
+        <div class="px-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
       </div>
     </div>
 
