@@ -42,7 +42,12 @@
     let horizontalRemove = (imageWidth - (imageHeight*goalWidth) / goalHeight) / 2;
     horizontalRemove = horizontalRemove < 0 ? 0 : (horizontalRemove + horizontalOffset);
 
-    bottomCrop.style.bottom = `${screenLandscape ? 0 : (body.offsetHeight - imageContainer.offsetHeight)}px`;
+    if (screenLandscape) {
+      bottomCrop.style.bottom = `0px`;
+    }
+    else {
+      bottomCrop.style.top = `${imageContainer.offsetHeight-verticalRemove}px`;
+    }
     bottomCrop.style.height = `${verticalRemove}px`;
     bottomCrop.style.width = `${imageContainer.offsetWidth}px`;
 
@@ -170,7 +175,7 @@
       <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
 
-    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
+    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-2 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
       <div>&#128722;</div>
       <div>{cartItemCount}</div>
     </a>

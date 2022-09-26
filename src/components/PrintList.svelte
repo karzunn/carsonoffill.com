@@ -50,7 +50,6 @@
     <div on:click={selectCategory} id="space" class="relative my-auto mx-auto text-center text-white {category != "space" ? "opacity-25" : ""} tracking-widest text-xl lg:text-2xl cursor-pointer">SPACE</div>
     <div on:click={selectCategory} id="math" class="relative my-auto mx-auto text-center text-white {category != "math" ? "opacity-25" : ""} tracking-widest text-xl lg:text-2xl cursor-pointer">MATH</div>
     {/key}
-    <div class="text-2xl pb-1 px-10px relative my-auto ml-1 invisible">&#8249;</div>
     <a class="relative right-0 text-white bg-darkestgray bg-opacity-75 font-bold py-1 px-2 my-auto mr-1 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
       <div>&#128722;</div>
       <div>{cartItemCount}</div>
