@@ -6,3 +6,5 @@
 /public/images
 
 *node_modules*
+
+keys.py

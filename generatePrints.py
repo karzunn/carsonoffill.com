@@ -1,3 +1,4 @@
+from operator import truediv
 from bs4 import BeautifulSoup
 from PIL import Image
 import json
@@ -13,14 +14,19 @@ def getMainImage(image_type,name):
 
 def sizeWorks(height,width,size,material):
     sizeSplit = size.split("x")
-    longest = width if height < width else height
-    shortest = width if height > width else height
-    longestInches = int(sizeSplit[1]) if int(sizeSplit[0]) < int(sizeSplit[1]) else int(sizeSplit[0])
-    shortestInches = int(sizeSplit[1]) if int(sizeSplit[0]) > int(sizeSplit[1]) else int(sizeSplit[0])
-    longestPossibleInches = longest/ppi_map[material]
-    shortestPossibleInches = shortest/ppi_map[material]
-    if longestPossibleInches >= longestInches and shortestPossibleInches >= shortestInches:
-        return True
+    minWidth = int(sizeSplit[0])*ppi_map[material]
+    minHeight = int(sizeSplit[1])*ppi_map[material]
+    if width >= minWidth and height >= minHeight:
+        if minWidth == minHeight:
+            return True
+        elif minWidth > minHeight and width > height:
+            return True
+        elif minWidth < minHeight and width < height:
+            return True
+        elif width == height:
+            return True
+        else:
+            return False
     return False
 
 def generateSizes(height,width,prices):
@@ -32,9 +38,8 @@ def generateSizes(height,width,prices):
                 template[t].append(size)
     return template
 
-
 prices = open("src\\prices.js", "r").read()
-prices = json.loads(prices.replace("export default ","").replace(";","").replace("//easycanvasprints","").replace("//canvasdiscount",""))["print"]
+prices = json.loads(prices.replace("export default ","").replace(";",""))["print"]
 
 for image_type in image_types:
 

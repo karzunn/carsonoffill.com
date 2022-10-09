@@ -22,8 +22,8 @@
     let screenLandscape = imageContainer.offsetHeight == body.offsetHeight;
     let imageAspectRatio = imageContainer.naturalWidth / imageContainer.naturalHeight;
     let containerAspectRatio = imageContainer.offsetWidth / imageContainer.offsetHeight;
-    let goalHeight = imageAspectRatio < 1 ? Number(selectedPrintSize.split("x")[1]) : Number(selectedPrintSize.split("x")[0]);
-    let goalWidth = imageAspectRatio < 1 ? Number(selectedPrintSize.split("x")[0]) : Number(selectedPrintSize.split("x")[1]);
+    let goalHeight = Number(selectedPrintSize.split("x")[1]);
+    let goalWidth = Number(selectedPrintSize.split("x")[0]);
 
     if (imageAspectRatio > containerAspectRatio) {
       imageHeight = imageContainer.offsetWidth / imageAspectRatio;
@@ -156,7 +156,7 @@
       sizeElement.className = "lg:text-base text-xs bg-brand text-white py-2 px-4 rounded my-4 lg:mr-4 mx-2 text-center size opacity-25 cursor-pointer";
       sizeElement.id = size;
       sizeElement.onclick = selectSize;
-      sizeElement.innerHTML = size;
+      sizeElement.innerHTML = size
       sizesContainer.appendChild(sizeElement);
     }
   }

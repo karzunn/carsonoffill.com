@@ -8,6 +8,9 @@
   let selectedSize = document.getElementsByClassName('selected size')[0].id;
   let selectedPhoto = item.name;
   let description = `${selectedPhoto} - ${selectedType} - ${selectedSize}`;
+  let width = selectedSize.split("x")[0];
+  let height = selectedSize.split("x")[1];
+  selectedSize = Number(width) > Number(height) ? selectedSize : `${height}x${width}`;
   let price = prices[item.type][selectedType].sizes[selectedSize];
 
   function addToCart(){

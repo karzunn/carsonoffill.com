@@ -2,17 +2,16 @@ test = False
 
 import stripe
 import json
+import keys
 
 base = ""
 
 if test:
-    stripe.api_key = "sk_test_51LVKz5A8Ti7QZNbk73gaMw7c2RL10pr5AkEC539YRkPOPBTRTDdTfgXebU41reiSU0DLKrzOhvQdWFOSLcKCmV2e00k40KMQsH"
+    stripe.api_key = keys.dev_api_key
     base = "http://carsonoffill-dev.s3-website-us-east-1.amazonaws.com"
 else:
-    stripe.api_key = "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"
+    stripe.api_key = keys.prod_api_key
     base = "http://carsonoffill.com"
-
-import json
 
 prints = open("src\\prints.js", "r").read()
 prints = json.loads(prints.replace("export default ","").replace(";",""))
@@ -32,6 +31,9 @@ else:
 for p in prints:
     for cat in p["sizes"]:
         for size in p["sizes"][cat]:
+            sizeSplit = size.split("x")
+            if int(sizeSplit[1]) > int(sizeSplit[0]):
+                size = "{}x{}".format(sizeSplit[1],sizeSplit[0])
             newPrint={}
             newPrint["description"] = "{} - {} - {}".format(p["name"],cat,size)
             existingPrint = [sp for sp in stripePrints if sp["description"] == newPrint["description"]]
