@@ -1,18 +1,14 @@
 import Cart from './components/Cart.svelte'
 import Home from './components/Home.svelte'
-import PrintList from './components/PrintList.svelte'
+import Store from './components/Store.svelte'
 import PrintItem from './components/PrintItem.svelte'
-import Types from './components/Types.svelte'
-import ComingSoon from './components/ComingSoon.svelte'
 import Unavailable from './components/Unavailable.svelte'
 
 const routes = {
     '/': Home,
-    '/store/types': Types,
-    '/store/prints': PrintList,
-    '/store/prints/:id': PrintItem,
-    '/store/cart': Cart,
-    '/comingsoon': ComingSoon,
+    '/cart': Cart,
+    '/store': Store,
+    '/store/:id': PrintItem,
     '/unavailable': Unavailable
 };
 

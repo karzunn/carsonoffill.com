@@ -1,4 +1,4 @@
-export const env = "dev"
+export const env = "prod"
 
 export const baseUrlProd = "https://carsonoffill.com"
 export const baseUrlDev = "http://localhost:3000"

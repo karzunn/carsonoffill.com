@@ -48,8 +48,8 @@
     let items = get(cartItems);
     stripe = await loadStripe(stripeKey);
     await stripe.redirectToCheckout({
-      successUrl: `${baseUrl}/#/store/cart?empty=true`,
-      cancelUrl: `${baseUrl}/#/store/cart`,
+      successUrl: `${baseUrl}/#/cart?empty=true`,
+      cancelUrl: `${baseUrl}/#/cart`,
       lineItems: Object.keys(items).map(key=>{
         let item = products.filter(product=>product.description == key)[0]
         return {price:item.price,quantity:items[key].quantity}

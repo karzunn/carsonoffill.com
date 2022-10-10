@@ -193,7 +193,7 @@
       <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
 
-    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-2 rounded text-center inline-flex cursor-pointer" href="#/store/cart">
+    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-2 rounded text-center inline-flex cursor-pointer" href="#/cart">
       <div>&#128722;</div>
       <div>{cartItemCount}</div>
     </a>

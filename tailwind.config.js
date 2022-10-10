@@ -16,6 +16,7 @@ module.exports = {
       spacing: {
         '1screen': '1vh',
         '10screen': '10vh',
+        '17screen': '17vh',
         '30screen': '30vh',
         '40screen': '40vh',
         '50screen': '50vh',
@@ -23,10 +24,13 @@ module.exports = {
       },
       height: {
         '1screen': '1vh',
+        '7screen': '7vh',
         '10screen': '10vh',
         '20screen': '20vh',
         '70screen': '70vh',
         '80screen': '80vh',
+        '73screen': '73vh',
+        '83screen': '83vh',
         '90screen': '90vh'
       },
       fontFamily: {
@@ -36,7 +40,8 @@ module.exports = {
         'black': 'rgb(0 0 0)',
         'gray': 'rgb(50 50 50)',
         'darkgray': 'rgb(35 35 35)',
-        'darkestgray': 'rgb(25 25 25)',
+        'darkergray': 'rgb(25 25 25)',
+        'darkestgray': 'rgb(15 15 15)',
         'accent': 'rgb(230 115 0)',
         'brand': 'rgb(60 100 120)'
       },
