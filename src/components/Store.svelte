@@ -76,7 +76,7 @@
     {/key}
   </div>
 
-  <div class="fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen hidden" : "top-17screen lg:h-83screen h-73screen"} bg-darkestgray w-full lg:h-90screen h-80screen my-15 overflow-auto">
+  <div class="fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen hidden" : "top-17screen lg:h-83screen h-73screen"} bg-darkestgray w-full my-15 overflow-auto">
     <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 bg-darkestgray">
       {#key category}
       {#each items as item}
@@ -91,7 +91,7 @@
     </div>
   </div>
 
-  <div class="flex fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen" : "top-17screen lg:h-83screen h-73screen hidden"} bg-darkestgray w-full lg:h-90screen h-80screen my-15 overflow-auto">
+  <div class="flex fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen" : "top-17screen lg:h-83screen h-73screen hidden"} bg-darkestgray w-full my-15 overflow-auto">
     <div class="m-auto text-xl text-white">
       Coming Soon!
     </div>
