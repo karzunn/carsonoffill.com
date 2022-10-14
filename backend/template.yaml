@@ -9,6 +9,9 @@ Resources:
     Properties:
       CodeUri: 
       Handler: app.lambdaHandler
+      Environment:
+        Variables:
+          STRIPEKEY: '{{resolve:ssm:carsonoffill-stripeKey}}'
       Runtime: nodejs14.x
       Events:
         Others:

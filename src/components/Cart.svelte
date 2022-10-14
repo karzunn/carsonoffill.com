@@ -1,6 +1,5 @@
 <script>
   
-  import { loadStripe } from '@stripe/stripe-js';
   import CartListItem from "./CartListItem.svelte";
   import { cartItems, history } from "../stores";
   import prints from "../prints";
@@ -11,6 +10,7 @@
   import { goBack } from '../functions';
   import { baseUrlDev,baseUrlProd,stripeKeyDev,stripeKeyProd,env } from "../constants";
   import { addHistory } from "../functions";
+  import { onMount } from 'svelte';
 
   let stripeKey;
   let baseUrl;
@@ -45,24 +45,42 @@
   history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
   async function checkout() {
-    let items = get(cartItems);
-    stripe = await loadStripe(stripeKey);
-    await stripe.redirectToCheckout({
-      successUrl: `${baseUrl}/#/cart?empty=true`,
-      cancelUrl: `${baseUrl}/#/cart`,
-      lineItems: Object.keys(items).map(key=>{
-        let item = products.filter(product=>product.description == key)[0]
-        return {price:item.price,quantity:items[key].quantity}
-      }),
-      mode: 'payment',
-      shippingAddressCollection: { allowedCountries: ["US"] }
-    })
+    window.location.href = checkoutUrl;
   }
 
   cartItems.subscribe(Items => {
     cartTotal = 0
     Object.keys(Items).map(key => cartTotal += Items[key].price * Items[key].quantity)
   });
+
+  let checkoutUrl;
+
+  //Probably should cache your checkout session if your cart is the same. Does a checkout session ever expire?
+
+  onMount(async () => {
+    let items = get(cartItems);
+    let response = await fetch("https://c33hscgtn1.execute-api.us-east-1.amazonaws.com/checkout",{
+      method:"POST",
+      mode:"cors",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        success_url: `${baseUrl}/#/cart?empty=true`,
+        cancel_url: `${baseUrl}/#/cart`,
+        line_items: Object.keys(items).map(key=>{
+          let item = products.filter(product=>product.description == key)[0]
+          return {price:item.price,quantity:items[key].quantity}
+        }),
+        mode: 'payment',
+        shipping_address_collection: { allowed_countries: ["US"] }
+      })
+    })
+    let session = await response.json();
+    checkoutUrl = session.url
+	});
 
 </script>
 

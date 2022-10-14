@@ -1,0 +1,10 @@
+POST https://c33hscgtn1.execute-api.us-east-1.amazonaws.com/checkout
+content-type: application/json
+
+{
+    "success_url": "http://localhost:3000/#/cart",
+    "cancel_url": "http://localhost:3000/#/cart",
+    "line_items": [{"price": "price_1Lr0WBA8Ti7QZNbk7Q32Qm7w", "quantity": 1}],
+    "mode": "payment",
+    "shipping_address_collection": { "allowed_countries": ["US"] }
+}
