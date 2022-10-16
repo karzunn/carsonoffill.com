@@ -32,8 +32,6 @@ for p in prints:
     for cat in p["sizes"]:
         for size in p["sizes"][cat]:
             sizeSplit = size.split("x")
-            if int(sizeSplit[1]) > int(sizeSplit[0]):
-                size = "{}x{}".format(sizeSplit[1],sizeSplit[0])
             newPrint={}
             newPrint["description"] = "{} - {} - {}".format(p["name"],cat,size)
             existingPrint = [sp for sp in stripePrints if sp["description"] == newPrint["description"]]
@@ -75,15 +73,16 @@ for p in prints:
                 if True:#response["data"][0]["unit_amount"] != int(prices[cat]["sizes"][size]*100):
                     response = stripe.Price.modify(
                         newPrint["price"],
+                        active=False,
                         tax_behavior="exclusive"
-                        #active=False
                     )
-                    # response = stripe.Price.create(
-                    #     unit_amount=int(prices[cat]["sizes"][size]*100),
-                    #     currency="usd",
-                    #     product=newPrint["product"],
-                    # )
-                    #newPrint["price"] = response["id"]
+                    response = stripe.Price.create(
+                        unit_amount=int(prices[cat]["sizes"][size]*100),
+                        currency="usd",
+                        product=newPrint["product"],
+                        tax_behavior="exclusive"
+                    )
+                    newPrint["price"] = response["id"]
 
             newStripePrints.append(newPrint)
 
