@@ -197,12 +197,12 @@
       <div class="absolute bg-black bg-opacity-75" id="rightCrop"></div>
     </div>
 
-    <a class="fixed top-0 right-0 text-white bg-gray font-bold py-1 px-2 m-2 rounded text-center inline-flex cursor-pointer" href="#/cart">
+    <a class="fixed top-0 right-0 text-white bg-gray font-bold w-40px m-2 py-1 justify-center rounded text-center inline-flex cursor-pointer" href="#/cart">
       <div>&#128722;</div>
       <div>{cartItemCount}</div>
     </a>
 
-    <div class="fixed text-2xl pb-1 px-10px m-2 top-0 left-0 text-white bg-gray bg-opacity-75 font-bold rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
+    <div class="fixed text-2xl pb-1 w-40px m-2 top-0 left-0 text-white bg-gray bg-opacity-75 font-bold rounded text-center cursor-pointer" on:click={goBack}>&#8249;</div>
 
     <div class="w-full tracking-widest lg:h-screen">
       <h1 class="lg:text-left lg:mt-8 text-center lg:text-4xl text-xl">{print.name.toUpperCase()}</h1>
@@ -212,16 +212,15 @@
       <h2 class="lg:text-left lg:mt-8 text-center lg:text-2xl text-xs">SIZE</h2>
       <div class="flex flex-wrap w-full lg:w-fit justify-center lg:justify-start" id="sizes">
       </div>
-      <div class="inline-flex mt-2 mb-4 lg:mt-16 w-full justify-center lg:justify-start">
+      <div class="inline-flex mt-2 lg:mt-16 w-full justify-center lg:justify-start">
         <Modal show={$modal}>
-          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 text-center cursor-pointer lg:text-base text-sm" style="display: none;" id="addToCart" on:click={showModal}>ADD TO CART</div>
+          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 mb-4 text-center cursor-pointer lg:text-base text-sm" style="display: none;" id="addToCart" on:click={showModal}>ADD TO CART</div>
         </Modal>
-        <div class="px-4 text-center lg:text-2xl text-base my-auto" style="display: none;" id="price"></div>
-        <div class="px-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
+        <div class="px-4 mb-4 text-center lg:text-2xl text-base my-auto" style="display: none;" id="price"></div>
+        <div class="px-4 mb-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
       </div>
+      <div class="text-sm my-0 text-white lg:text-left text-center" style="display: none;" id="freeShipping">Shipping Included*</div>
     </div>
-
-    <div class="fixed text-lg m-2 bottom-0 right-0 text-white text-center" style="display: none;" id="freeShipping">*Free Shipping</div>
 
   </div>
 

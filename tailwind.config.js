@@ -33,6 +33,9 @@ module.exports = {
         '83screen': '83vh',
         '90screen': '90vh'
       },
+      width: {
+        '40px': '40px'
+      },
       fontFamily: {
         'sans': '"Source Sans Pro", Helvetica, sans-serif'
       },

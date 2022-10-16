@@ -56,13 +56,13 @@
 <div class="bg-darkgray h-screen">
 
   <div class="fixed inset-x-0 top-0 bg-darkgray w-screen h-10screen my-auto inline-flex">
-    <a class="text-2xl pb-1 px-10px relative text-white bg-darkestgray font-bold my-auto ml-1 rounded text-center cursor-pointer" href="/">&#8249;</a>
+    <a class="text-2xl pb-1 relative text-white bg-darkestgray font-bold my-auto ml-1 w-40px rounded text-center cursor-pointer" href="/">&#8249;</a>
     {#key category}
     <div on:click={selectType} id="photobook" class="relative w-1/3 my-auto mx-auto text-center text-white {type != "photobook" ? "opacity-25" : ""} tracking-widest text-sm lg:text-2xl cursor-pointer">PHOTOBOOKS</div>
     <div on:click={selectType} id="print" class="relative w-1/3 my-auto mx-auto text-center text-white {type != "print" ? "opacity-25" : ""} tracking-widest text-sm lg:text-2xl cursor-pointer">PRINTS</div>
     <div on:click={selectType} id="calendar" class="relative w-1/3 my-auto mx-auto text-center text-white {type != "calendar" ? "opacity-25" : ""} tracking-widest text-sm lg:text-2xl cursor-pointer">CALENDARS</div>
     {/key}
-    <a class="relative right-0 text-white bg-darkestgray bg-opacity-75 font-bold py-1 px-2 my-auto mr-1 rounded text-center inline-flex cursor-pointer" href="#/cart">
+    <a class="relative right-0 text-white bg-darkestgray bg-opacity-75 font-bold py-1 my-auto mr-1 w-40px justify-center rounded text-center inline-flex cursor-pointer" href="#/cart">
       <div>&#128722;</div>
       <div>{cartItemCount}</div>
     </a>
