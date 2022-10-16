@@ -13,9 +13,6 @@ export function goBack() {
 
 export function addHistory() {
     history.update(history => {
-        if (window.location.hash.includes("cart?empty=true")) {
-            history.pop();
-        }
         if (window.location.hash != history.slice(-1)[0]) {
           return history.concat(window.location.hash)
         }

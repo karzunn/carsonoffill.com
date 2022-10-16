@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "update-site": "aws cloudfront create-invalidation --distribution-id E3IFBVHQCHCCXF --paths \"/build/*\"",
     "s3-dev": "aws s3 cp public\\build s3://carsonoffill-dev/build --recursive",
     "s3-prod": "aws s3 cp public\\build s3://carsonoffill.com/build --recursive",
     "build": "rollup -c",

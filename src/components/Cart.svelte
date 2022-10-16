@@ -8,27 +8,25 @@
   import { get } from 'svelte/store';
   import { querystring } from 'svelte-spa-router';
   import { goBack } from '../functions';
-  import { baseUrlDev,baseUrlProd,stripeKeyDev,stripeKeyProd,env } from "../constants";
+  import { baseUrlDev,baseUrlProd,backendUrlDev,backendUrlProd,env } from "../constants";
   import { addHistory } from "../functions";
-  import { onMount } from 'svelte';
 
-  let stripeKey;
   let baseUrl;
   let products;
+  let backendUrl;
 
   if (env == "prod") {
-    stripeKey = stripeKeyProd;
     baseUrl = baseUrlProd;
     products = productsProd;
+    backendUrl = backendUrlProd;
   }
   if (env == "dev") {
-    stripeKey = stripeKeyDev;
     baseUrl = baseUrlDev;
     products = productsDev;
+    backendUrl = backendUrlDev;
   }
 
   let cartTotal = 0;
-  let stripe;
 
   let queryparams = {};
   let vars = $querystring.split('&');
@@ -37,50 +35,36 @@
       queryparams[pair[0]] = pair[1];
   }
 
-  if (queryparams.empty == "true") {
-    cartItems.update(cartItems=>{return {}})
-  }
-
   addHistory();
   history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
   async function checkout() {
-    window.location.href = checkoutUrl;
+    let items = get(cartItems);
+    let response = await fetch(`${backendUrl}/checkout`,{
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        success_url: `${baseUrl}/#/thankyou?empty=true`,
+        cancel_url: `${baseUrl}/#/cart`,
+        line_items: Object.keys(items).map(key=>{
+          let item = products.filter(product=>product.description == key)[0]
+          return {price:item.price,quantity:items[key].quantity}
+        }),
+        automatic_tax: {  enabled: true }, //Overridden later in the backend for safety
+        mode: 'payment', //Overridden later in the backend for safety
+        shipping_address_collection: { allowed_countries: ["US"] } //Overridden later in the backend for safety
+      })
+    })
+    let session = await response.json();
+    window.location.href = session.url;
   }
 
   cartItems.subscribe(Items => {
     cartTotal = 0
     Object.keys(Items).map(key => cartTotal += Items[key].price * Items[key].quantity)
   });
-
-  let checkoutUrl;
-
-  //Probably should cache your checkout session if your cart is the same. Does a checkout session ever expire?
-
-  onMount(async () => {
-    let items = get(cartItems);
-    let response = await fetch("https://c33hscgtn1.execute-api.us-east-1.amazonaws.com/checkout",{
-      method:"POST",
-      mode:"cors",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        success_url: `${baseUrl}/#/cart?empty=true`,
-        cancel_url: `${baseUrl}/#/cart`,
-        line_items: Object.keys(items).map(key=>{
-          let item = products.filter(product=>product.description == key)[0]
-          return {price:item.price,quantity:items[key].quantity}
-        }),
-        mode: 'payment',
-        shipping_address_collection: { allowed_countries: ["US"] }
-      })
-    })
-    let session = await response.json();
-    checkoutUrl = session.url
-	});
 
 </script>
 

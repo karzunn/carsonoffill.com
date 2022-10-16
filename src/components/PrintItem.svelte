@@ -83,10 +83,11 @@
     let selectedType = document.getElementsByClassName('selected type')[0].id;
     let selectedSize = document.getElementsByClassName('selected size')[0].id;
     let price = prices[print.type][selectedType].sizes[selectedSize];
-    priceDisplay.innerHTML = "$" + price.toString();
+    priceDisplay.innerHTML = "$" + price.toString() + "*";
   }
 
   function selectType(e){
+    let freeShipping = document.getElementById('freeShipping');
     let addToCartButton = document.getElementById('addToCart');
     let priceDisplay = document.getElementById('price');
     let selectSizeMessage = document.getElementById('selectSizeMessage');
@@ -104,6 +105,7 @@
     {
       generateSizes();
     }
+    freeShipping.style.display = "none";
     addToCartButton.style.display = "none";
     priceDisplay.style.display = "none";
     selectSizeMessage.style.display = "block";
@@ -117,6 +119,7 @@
 
   function selectSize(e){
     let addToCartButton = document.getElementById('addToCart');
+    let freeShipping = document.getElementById('freeShipping');
     let priceDisplay = document.getElementById('price');
     let selectSizeMessage = document.getElementById('selectSizeMessage');
     let types = document.querySelectorAll('.size');
@@ -128,6 +131,7 @@
     selected.classList.add("selected"); selected.classList.remove("opacity-25");
     addToCartButton.style.display = "block";
     priceDisplay.style.display = "block";
+    freeShipping.style.display = "block";
     selectSizeMessage.style.display = "none";
     calcPrice();
     updateCrop();
@@ -216,6 +220,8 @@
         <div class="px-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
       </div>
     </div>
+
+    <div class="fixed text-lg m-2 bottom-0 right-0 text-white text-center" style="display: none;" id="freeShipping">*Free Shipping</div>
 
   </div>
 
