@@ -1,4 +1,3 @@
-from operator import truediv
 from bs4 import BeautifulSoup
 from PIL import Image
 import json
