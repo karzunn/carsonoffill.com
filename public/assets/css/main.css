@@ -1685,6 +1685,17 @@ body {
 				z-index: 1;
 			}
 
+			#main .thumb > .AddToCart {
+				pointer-events: none;
+				bottom: 1.875em;
+				font-size: 0.8em;
+				right: 2.1875em;
+				margin: 0;
+				position: absolute;
+				z-index: 1;
+				display: none;
+			}
+
 			#main .thumb > p {
 				display: none;
 			}
@@ -1911,7 +1922,7 @@ body {
 				transition-delay: 1.625s;
 				height: calc(40vh - 5em);
 				min-height: 20em;
-				width: 50%;
+				width: 33.333333%;
 			}
 
 				#main .thumb:nth-child(1) {
@@ -2141,7 +2152,7 @@ body {
 	position: fixed;
 	top: 4em;
 	right: 0;
-	z-index: 20000;
+	z-index: 200;
 }
 
 #popupInfo h2{

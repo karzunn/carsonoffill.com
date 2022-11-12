@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 
+  Backend for carsonoffill.com
+
+Parameters:
+  env:
+    Type: String
+    Default: prod
+    AllowedValues:
+      - dev
+      - prod
+
+Resources:
+  EndpointFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: 
+      Handler: app.lambdaHandler
+      Environment:
+        Variables:
+          STRIPEKEY: !Sub '{{resolve:ssm:${env}-carsonoffill-stripeKey}}'
+      Runtime: nodejs14.x
+      Events:
+        Others:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        Base:
+          Type: HttpApi
+          Properties:
+            Path: / 
+            Method: ANY
+      MemorySize: 128
+      Timeout: 60

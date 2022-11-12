@@ -1,0 +1,40 @@
+<script>
+  import { cartItems } from "../stores";
+  import { getContext } from 'svelte';
+  import prices from "../prices";
+  const { close } = getContext('simple-modal');
+  export let item = {};
+  let selectedType = document.getElementsByClassName('selected type')[0].id;
+  let selectedSize = document.getElementsByClassName('selected size')[0].id;
+  let selectedPhoto = item.name;
+  let description = `${selectedPhoto} - ${selectedType} - ${selectedSize}`;
+  let width = selectedSize.split("x")[0];
+  let height = selectedSize.split("x")[1];
+  selectedSize = Number(width) > Number(height) ? selectedSize : `${height}x${width}`;
+  let price = prices[item.type][selectedType].sizes[selectedSize];
+
+  function addToCart(){
+    cartItems.update(cartItems => {
+      if (cartItems[description]){
+        cartItems[description].quantity += 1
+      }
+      else{
+        cartItems[description] = {
+          "id":item.id,
+          "price":price,
+          "quantity":1
+        }
+      }
+      return cartItems;
+    });
+    close();
+  }
+
+  cartItems.subscribe(cartItems => localStorage.setItem("cartItems", JSON.stringify(cartItems)));
+</script>
+
+<div class="w-full">
+    <h1 class="text-center mb-4 mx-auto text-2xl font-bold">ADD TO CART?</h1>
+    <h1 class="text-center mb-6 mx-auto text-xl">{description}</h1>
+    <div class="bg-accent text-white px-4 py-2 rounded m-auto text-center w-1/2 cursor-pointer" on:click={addToCart}>ADD</div>
+</div>

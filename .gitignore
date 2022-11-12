@@ -1,2 +1,10 @@
-images
-node_modules
+/node_modules/
+/public/build/
+
+.DS_Store
+
+/public/images
+
+*node_modules*
+
+keys.py

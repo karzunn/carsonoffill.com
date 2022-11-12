@@ -1,0 +1,9 @@
+{
+    "name": "carsonoffill-backend",
+    "version": "1.0.0",
+    "dependencies": {
+        "aws-sdk": "^2.918.0",
+        "lambda-api": "https://github.com/jeremydaly/lambda-api.git#v0.11",
+        "stripe": "^10.13.0"
+    }
+}
