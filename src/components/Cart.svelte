@@ -43,6 +43,7 @@
 
   async function checkout() {
     let items = get(cartItems);
+    console.log(items);
     let response = await fetch(`${backendUrl}/checkout`,{
       method:"POST",
       headers: {

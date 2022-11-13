@@ -1,4 +1,4 @@
-export const env = "prod"
+export const env = "dev"
 
 export const backendUrlDev = "https://xfvdcslyjf.execute-api.us-east-1.amazonaws.com"
 export const backendUrlProd = "https://c33hscgtn1.execute-api.us-east-1.amazonaws.com"

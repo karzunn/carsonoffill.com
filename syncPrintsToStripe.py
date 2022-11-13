@@ -1,4 +1,4 @@
-test = False
+test = True
 
 import stripe
 import json
@@ -57,6 +57,7 @@ for p in prints:
                         unit_amount=int(prices[cat]["sizes"][size]*100),
                         currency="usd",
                         product=newPrint["product"],
+                        tax_behavior="exclusive"
                     )
                     newPrint["price"] = response["id"]
             else:
@@ -70,7 +71,7 @@ for p in prints:
                     query='product:"{}"'.format(newPrint["product"]),
                 )
                 newPrint["price"] = response["data"][0]["id"]
-                if True:#response["data"][0]["unit_amount"] != int(prices[cat]["sizes"][size]*100):
+                if response["data"][0]["unit_amount"] != int(prices[cat]["sizes"][size]*100):
                     response = stripe.Price.modify(
                         newPrint["price"],
                         active=False,
