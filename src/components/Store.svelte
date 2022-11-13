@@ -2,6 +2,7 @@
 
   import StoreListItem from "./StoreListItem.svelte";
   import allPrints from "../prints";
+  import calendars from "../calendars";
   import {querystring} from 'svelte-spa-router';
   import { cartItems } from "../stores";
   import { history } from "../stores";
@@ -24,6 +25,7 @@
   let type = queryparams.type ? queryparams.type : "print"
   let category = queryparams.category ? queryparams.category : "earth"
 
+  let availableTypes = ["print","calendar"];
   let types = ["print","photobook","calendar"];
   if (!types.includes(type)) {
     window.location.href = '/#/unavailable';
@@ -38,11 +40,11 @@
   window.onhashchange = () => { addHistory() };
   history.subscribe(history => localStorage.setItem("history", JSON.stringify(history)));
 
-  let items = allPrints.filter(photo => photo.category == category);
+  let prints = allPrints.filter(photo => photo.category == category);
 
   function selectCategory(e) {
     category = e.target.id;
-    items = allPrints.filter(photo => photo.category == category);
+    prints = allPrints.filter(photo => photo.category == category);
     window.location.href = `/#/store?type=print&category=${category}`
   }
 
@@ -76,14 +78,14 @@
     {/key}
   </div>
 
-  <div class="fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen hidden" : "top-17screen lg:h-83screen h-73screen"} bg-darkestgray w-full my-15 overflow-auto">
+  <div class="fixed inset-x-0 {type == "print" ? "top-17screen lg:h-83screen h-73screen" : "top-10screen lg:h-90screen h-80screen hidden"} bg-darkestgray w-full my-15 overflow-auto">
     <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 bg-darkestgray">
       {#key category}
-      {#each items as item}
-        <a href="#/store/{item.id}">
+      {#each prints as print}
+        <a href="#/store/print/{print.id}">
           <StoreListItem
-            name={item.name}
-            thumb={item.thumb}
+            name={print.name}
+            thumb={print.thumb}
           />
         </a>
       {/each}
@@ -91,7 +93,22 @@
     </div>
   </div>
 
-  <div class="flex fixed inset-x-0 {type != "print" ? "top-10screen lg:h-90screen h-80screen" : "top-17screen lg:h-83screen h-73screen hidden"} bg-darkestgray w-full my-15 overflow-auto">
+  <div class="fixed inset-x-0 {type == "calendar" ? "top-10screen lg:h-90screen h-80screen" : "top-10screen lg:h-90screen h-80screen hidden"} bg-darkestgray w-full my-15 overflow-auto">
+    <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 bg-darkestgray">
+      {#key category}
+      {#each calendars as calendar}
+        <a href="#/store/calendar/{calendar.id}">
+          <StoreListItem
+            name={calendar.name}
+            thumb={calendar.thumb}
+          />
+        </a>
+      {/each}
+      {/key}
+    </div>
+  </div>
+
+  <div class="flex fixed inset-x-0 {!availableTypes.includes(type) ? "top-10screen lg:h-90screen h-80screen" : "top-17screen lg:h-83screen h-73screen hidden"} bg-darkestgray w-full my-15 overflow-auto">
     <div class="m-auto text-xl text-white">
       Coming Soon!
     </div>
