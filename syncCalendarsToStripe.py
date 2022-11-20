@@ -1,4 +1,4 @@
-test = False
+test = True
 
 import stripe
 import json

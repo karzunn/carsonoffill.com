@@ -4,7 +4,10 @@ content-type: application/json
 {
     "success_url": "http://localhost:3000/#/cart",
     "cancel_url": "http://localhost:3000/#/cart",
-    "line_items": [{"price": "price_1M3VvIA8Ti7QZNbkQjI4XZKt", "quantity": 1}],
+    "line_items": [
+        {"price": "price_1M6HaQA8Ti7QZNbk4N6K6fX5", "quantity": 1},
+        {"price": "price_1M6HSvA8Ti7QZNbkdbSsLXsY", "quantity": 1}
+        ],
     "mode": "payment",
     "shipping_address_collection": { "allowed_countries": ["US"] }
 }
