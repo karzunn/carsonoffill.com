@@ -43,7 +43,6 @@
 
   async function checkout() {
     let items = get(cartItems);
-    console.log(items);
     let response = await fetch(`${backendUrl}/checkout`,{
       method:"POST",
       headers: {
@@ -53,8 +52,14 @@
         success_url: `${baseUrl}/#/thankyou?empty=true`,
         cancel_url: `${baseUrl}/#/cart`,
         line_items: Object.keys(items).map(key=>{
-          let item = products.filter(product=>product.description == key)[0]
-          return {price:item.price,quantity:items[key].quantity}
+          console.log(key);
+          console.log(products);
+          let item = products.filter(product=>product.description == key)[0];
+          console.log(item);
+          return {
+            price: item.price,
+            quantity: items[key].quantity
+          }
         }),
         automatic_tax: {  enabled: true }, //Overridden later in the backend for safety
         mode: 'payment', //Overridden later in the backend for safety

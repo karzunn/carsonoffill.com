@@ -142,7 +142,7 @@
     let types = Object.keys(print.sizes);
     for (let type of types){
       let typeElement = document.createElement("div");
-      typeElement.className = "lg:text-base text-xs bg-brand text-white py-2 px-4 rounded my-4 lg:mr-4 mx-2 type opacity-25 cursor-pointer";
+      typeElement.className = "lg:text-base text-xs bg-brand text-white py-2 px-4 rounded my-1 lg:mr-4 mx-2 type opacity-25 cursor-pointer";
       typeElement.id = type;
       typeElement.onclick = selectType;
       typeElement.innerHTML = type.toUpperCase();
@@ -157,7 +157,7 @@
     let sizes = print.sizes[selectedType];
     for (let size of sizes){
       let sizeElement = document.createElement("div");
-      sizeElement.className = "lg:text-base text-xs bg-brand text-white py-2 px-4 rounded my-4 lg:mr-4 mx-2 text-center size opacity-25 cursor-pointer";
+      sizeElement.className = "lg:text-base text-xs bg-brand text-white py-2 px-4 rounded my-1 lg:mr-4 mx-2 text-center size opacity-25 cursor-pointer";
       sizeElement.id = size;
       sizeElement.onclick = selectSize;
       sizeElement.innerHTML = size
@@ -206,20 +206,20 @@
 
     <div class="w-full tracking-widest lg:h-screen">
       <h1 class="lg:text-left lg:mt-8 text-center lg:text-4xl text-xl">{print.name.toUpperCase()}</h1>
-      <h2 class="lg:text-left lg:mt-8 text-center mt-2 lg:text-2xl text-xs">TYPE</h2>
+      <h2 class="lg:text-left lg:mt-8 text-center lg:text-2xl text-xs">TYPE</h2>
       <div class="flex flex-wrap w-full lg:w-fit justify-center lg:justify-start" id="types">
       </div>
       <h2 class="lg:text-left lg:mt-8 text-center lg:text-2xl text-xs">SIZE</h2>
       <div class="flex flex-wrap w-full lg:w-fit justify-center lg:justify-start" id="sizes">
       </div>
-      <div class="inline-flex mt-2 lg:mt-16 w-full justify-center lg:justify-start">
+      <div class="inline-flex mt-2 lg:mt-12 w-full justify-center lg:justify-start">
         <Modal show={$modal}>
-          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 mb-4 text-center cursor-pointer lg:text-base text-sm" style="display: none;" id="addToCart" on:click={showModal}>ADD TO CART</div>
+          <div class="bg-accent text-white font-semibold px-4 py-2 rounded mr-2 mb-3 text-center cursor-pointer lg:text-base text-sm" style="display: none;" id="addToCart" on:click={showModal}>ADD TO CART</div>
         </Modal>
-        <div class="px-4 mb-4 text-center lg:text-2xl text-base my-auto" style="display: none;" id="price"></div>
-        <div class="px-4 mb-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
+        <div class="px-4 text-center lg:text-2xl text-base my-auto" style="display: none;" id="price"></div>
+        <div class="px-4 text-center lg:text-2xl text-base my-auto" id="selectSizeMessage">Please select a size</div>
       </div>
-      <div class="text-sm my-0 text-white lg:text-left text-center" style="display: none;" id="freeShipping">Shipping Included*</div>
+      <div class="text-sm text-white lg:text-left text-center" style="display: none;" id="freeShipping">Shipping Included*</div>
     </div>
 
   </div>
