@@ -20,7 +20,7 @@ def sizeWorks(height,width,size,material):
             return True
         elif width<height and minWidth<=minHeight:
             return True
-        elif width==height and minWidth>minHeight:
+        elif width==height and minWidth>=minHeight:
             return True
     return False
 
