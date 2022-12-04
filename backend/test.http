@@ -1,10 +1,13 @@
-POST https://c33hscgtn1.execute-api.us-east-1.amazonaws.com/checkout
+POST https://xfvdcslyjf.execute-api.us-east-1.amazonaws.com/checkout
 content-type: application/json
 
 {
     "success_url": "http://localhost:3000/#/cart",
     "cancel_url": "http://localhost:3000/#/cart",
-    "line_items": [{"price": "price_1LtcShA8Ti7QZNbkM4POoIO5", "quantity": 1}],
+    "line_items": [
+        {"price": "price_1M6HaQA8Ti7QZNbk4N6K6fX5", "quantity": 1},
+        {"price": "price_1M6HSvA8Ti7QZNbkdbSsLXsY", "quantity": 1}
+        ],
     "mode": "payment",
     "shipping_address_collection": { "allowed_countries": ["US"] }
 }

@@ -15,17 +15,13 @@ def sizeWorks(height,width,size,material):
     sizeSplit = size.split("x")
     minWidth = int(sizeSplit[0])*ppi_map[material]
     minHeight = int(sizeSplit[1])*ppi_map[material]
-    if width >= minWidth and height >= minHeight:
-        if minWidth == minHeight:
+    if minWidth<=width and minHeight<=height:
+        if width>height and minWidth>=minHeight:
             return True
-        elif minWidth > minHeight and width > height:
+        elif width<height and minWidth<=minHeight:
             return True
-        elif minWidth < minHeight and width < height:
+        elif width==height and minWidth>minHeight:
             return True
-        elif width == height:
-            return True
-        else:
-            return False
     return False
 
 def generateSizes(height,width,prices):

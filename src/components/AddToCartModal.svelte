@@ -4,14 +4,25 @@
   import prices from "../prices";
   const { close } = getContext('simple-modal');
   export let item = {};
-  let selectedType = document.getElementsByClassName('selected type')[0].id;
-  let selectedSize = document.getElementsByClassName('selected size')[0].id;
-  let selectedPhoto = item.name;
-  let description = `${selectedPhoto} - ${selectedType} - ${selectedSize}`;
-  let width = selectedSize.split("x")[0];
-  let height = selectedSize.split("x")[1];
-  selectedSize = Number(width) > Number(height) ? selectedSize : `${height}x${width}`;
-  let price = prices[item.type][selectedType].sizes[selectedSize];
+  let price;
+  let description;
+
+  if (item.type == "print")
+  {
+    let selectedType = document.getElementsByClassName('selected type')[0].id;
+    let selectedSize = document.getElementsByClassName('selected size')[0].id;
+    let selectedPhoto = item.name;
+    description = `${selectedPhoto} - ${selectedType} - ${selectedSize}`;
+    price = prices[item.type][selectedType].sizes[selectedSize];
+  }
+
+  if (item.type == "calendar")
+  {
+    let selectedSize = document.getElementsByClassName('selected size')[0].id;
+    let selectedCalendar = item.name;
+    description = `${selectedCalendar} - calendar - ${selectedSize}`;
+    price = prices[item.type].sizes[selectedSize];
+  }
 
   function addToCart(){
     cartItems.update(cartItems => {
@@ -20,7 +31,8 @@
       }
       else{
         cartItems[description] = {
-          "id":item.id,
+          "name":item.name,
+          "thumb":item.thumb,
           "price":price,
           "quantity":1
         }

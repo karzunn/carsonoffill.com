@@ -13,5 +13,10 @@ export default {
         "16x20":34.99
       }
     }
+  },
+  "calendar": {
+    "sizes": {
+      "8.5x11":24.99
+    }
   }
 }

@@ -2,9 +2,10 @@
   
   import CartListItem from "./CartListItem.svelte";
   import { cartItems, history } from "../stores";
-  import prints from "../prints";
-  import productsProd from "../stripePrints";
-  import productsDev from "../test-stripePrints";
+  import printProductsProd from "../stripePrints";
+  import printProductsDev from "../test-stripePrints";
+  import calendarProductsProd from "../stripeCalendars";
+  import calendarProductsDev from "../test-stripeCalendars";
   import { get } from 'svelte/store';
   import { querystring } from 'svelte-spa-router';
   import { goBack } from '../functions';
@@ -12,17 +13,19 @@
   import { addHistory } from "../functions";
 
   let baseUrl;
-  let products;
+  let products = [];
   let backendUrl;
 
   if (env == "prod") {
     baseUrl = baseUrlProd;
-    products = productsProd;
+    products.push(...printProductsProd);
+    products.push(...calendarProductsProd);
     backendUrl = backendUrlProd;
   }
   if (env == "dev") {
     baseUrl = baseUrlDev;
-    products = productsDev;
+    products.push(...printProductsDev);
+    products.push(...calendarProductsDev);
     backendUrl = backendUrlDev;
   }
 
@@ -49,8 +52,14 @@
         success_url: `${baseUrl}/#/thankyou?empty=true`,
         cancel_url: `${baseUrl}/#/cart`,
         line_items: Object.keys(items).map(key=>{
-          let item = products.filter(product=>product.description == key)[0]
-          return {price:item.price,quantity:items[key].quantity}
+          console.log(key);
+          console.log(products);
+          let item = products.filter(product=>product.description == key)[0];
+          console.log(item);
+          return {
+            price: item.price,
+            quantity: items[key].quantity
+          }
         }),
         automatic_tax: {  enabled: true }, //Overridden later in the backend for safety
         mode: 'payment', //Overridden later in the backend for safety
@@ -73,8 +82,8 @@
   <div class="fixed inset-x-0 top-10screen bg-darkgray w-full lg:h-80screen h-70screen my-15 overflow-auto">
     {#each Object.keys($cartItems) as cartItemKey}
       <CartListItem
-        thumb={prints.filter(d=>d.id == $cartItems[cartItemKey].id)[0].thumb}
-        name={prints.filter(d=>d.id == $cartItems[cartItemKey].id)[0].name}
+        thumb={$cartItems[cartItemKey].thumb}
+        name={$cartItems[cartItemKey].name}
         description={cartItemKey}
         price={$cartItems[cartItemKey].price}
         quantity={$cartItems[cartItemKey].quantity}
